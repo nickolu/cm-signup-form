@@ -1,0 +1,8 @@
+query getAllBusinessUnderstandingLevels {
+    getAllBusinessUnderstandingLevels {
+        BusinessUnderstandingLevel {
+            name
+            id
+        }
+    }
+}

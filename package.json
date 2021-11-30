@@ -1,0 +1,16 @@
+{
+  "name": "cm-signup-form",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nickolu/cm-signup-form.git",
+  "author": "Nick Cunningham <nickolusroy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.5.5",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
+    "graphql": "^16.0.1",
+    "graphql-tag": "^2.12.6"
+  }
+}

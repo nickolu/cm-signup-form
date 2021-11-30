@@ -1,0 +1,8 @@
+query getAllExperienceLevels {
+    getAllExperienceLevels {
+        ExperienceLevel {
+            name
+            id
+        }
+    }
+}

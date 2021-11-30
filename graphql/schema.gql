@@ -1,0 +1,44 @@
+type SubmitPortfolioPayload {
+    status: String!
+}
+
+type Query {
+    getPortfolioByPortfolioLink(portfolioLink: String!): Portfolio
+    getCategories: Category
+    getQualityPerspectives: [QualityPerspective]
+    getExperienceLevels: [ExperienceLevel]
+    getBusinessUnderstandingLevels: [BusinessUnderstandingLevel]
+}
+
+type BusinessUnderstandingLevel {
+    name: String!
+    id: String!
+}
+
+type Category {
+    name: String!
+    id: String!
+}
+
+type ExperienceLevel {
+    name: String!
+    id: String!
+}
+
+type Portfolio {
+    id: String!
+    firstName: String!
+    lastName: String! 
+    categoryId: String!
+    portfolioLink: String!
+    hasOnlineStore: Boolean!
+    onlineStoreUrls: String
+    qualityPerspectiveId: String!
+    experienceLevelId: String!
+    businessUnderstandingId: String!
+}
+
+type QualityPerspective {
+    name: String!
+    id: String!
+}

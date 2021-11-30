@@ -1,0 +1,8 @@
+query getAllQualityPerspectives {
+    getAllQualityPerspectives {
+        QualityPerspective {
+            name
+            id
+        }
+    }
+}
