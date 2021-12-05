@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# cm-signup-form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 1. DB stuff
 
-In the project directory, you can run:
+For the first step I'm going to review the requirements and use that to come up with what will likely by my graphql schema for reading and writing from the db. I'm going to use Fauna to store the data with a graphql api, since thats what I'm most used to using and will be the easiest to set up.
 
-### `yarn start`
+Below is the rough graphql schema. I decided that the easiest way to maintain this will be to keep any of the dropdown options in the db rather than hard-coding them into to front-end. That will allow us to change the options in the future without requiring a code change. It also will mean there is a single source of truth for those dropdown options and there is no risk of having an option get presented on the front-end that isn't part of our actual model or business logic. Finally, it will make reporting the selected options easier, since we will query by a category id instead of a specific string match. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In order to prevent a duplicate form from being submitted, I'll create a query to get a portfolio by portfolio link. If the response is successful, I can infer that the portfolio link is already in use. That will be a lot more effecient than checking the given portfolio link against every existing portfolio link.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Queries
 
-### `yarn test`
+```gql
+getPortfolioByPortfolioLink(portfolioLink: string!) {
+    Portfolio {
+        id
+    }
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+getCategories {
+    Category {
+        name
+        id
+    }
+}
 
-### `yarn build`
+getQualityPerspectives {
+    QualityPerspective {
+        name
+        id
+    }
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+getExperienceLevels {
+    ExperienceLevel {
+        name
+        id
+    }
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+getBusinessUnderstandingLevels {
+    BusinessUnderstandingLevel {
+        name
+        id
+    }
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Mutations
+```gql
+submitPortfolio(
+    firstName: string!
+    lastName: string! 
+    categoryId: string!
+    portfolioLink: string!
+    hasOnlineStore: string!
+    onlineStoreUrls: string
+    qualityPerspectiveId: string!
+    experienceLevelId: string!
+    businessUnderstandingId: string!
+) {
+    status
+} 
+```
