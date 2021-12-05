@@ -1,0 +1,49 @@
+{
+    "root": true,
+    "extends": ["plugin:react/recommended", "google", "prettier"],
+    "plugins": ["jest", "graphql", "jest-dom", "testing-library", "prettier"],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false,
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": ["next/babel"]
+        }
+    },
+    "env": {
+        "browser": true,
+        "jest/globals": true,
+        "node": true
+    },
+    "rules": {
+        "complexity": ["error", 8],
+        "new-cap": [
+            "error",
+            {
+                "capIsNewExceptions": [
+                    "express.Router",
+                    "NextAuth",
+                    "Providers.Credentials"
+                ]
+            }
+        ],
+        "no-console": "error",
+        "no-implicit-coercion": 0,
+        "no-undef": 1,
+        "no-var": 1,
+        "prefer-const": 1,
+        "react/jsx-uses-vars": 1,
+        "react/react-in-jsx-scope": 0,
+        "require-jsdoc": 0,
+        "valid-jsdoc": 0,
+        "testing-library/await-async-query": "error",
+        "testing-library/no-await-sync-query": "error",
+        "testing-library/no-debug": "warn",
+        "testing-library/no-dom-import": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
