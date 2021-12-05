@@ -39,9 +39,7 @@ describe('Step One of Signup Application', () => {
 
         userEvent.type(firstNameInput, 'Nick');
 
-        const queriedInput = screen.queryByDisplayValue('Nick');
-
-        expect(queriedInput).toBeInTheDocument();
+        expect(firstNameInput.value).toBe('Nick');
     });
 
     test('last name input', () => {
@@ -49,9 +47,7 @@ describe('Step One of Signup Application', () => {
 
         userEvent.type(lastNameInput, 'Cunningham');
 
-        const queriedInput = screen.queryByDisplayValue('Cunningham');
-
-        expect(queriedInput).toBeInTheDocument();
+        expect(lastNameInput.value).toBe('Cunningham');
     });
 
     test('category select', () => {
@@ -59,13 +55,11 @@ describe('Step One of Signup Application', () => {
 
         userEvent.click(categorySelect);
 
-        const firstElement = screen.getByLabelText('0');
+        const menuItems = screen.getAllByRole('option');
 
-        userEvent.click(firstElement);
+        userEvent.click(menuItems[1]);
 
-        const queriedInput = screen.getByLabelText('0', {selected: true});
-
-        expect(queriedInput).toBeInTheDocument();
+        expect(menuItems[1].selected).toBe(true);
     });
 
     test('portfolio link', () => {
@@ -73,9 +67,7 @@ describe('Step One of Signup Application', () => {
 
         userEvent.type(portfolioLinkInput, 'mywebsite.com');
 
-        const queriedInput = screen.queryByDisplayValue('mywebsite.com');
-
-        expect(queriedInput).toBeInTheDocument();
+        expect(portfolioLinkInput.value).toBe('mywebsite.com');
     });
 
     test('radio group', () => {
@@ -103,7 +95,9 @@ function queryformElements(screen) {
     const lastNameInput = screen.queryByRole('textbox', {
         name: 'Last Name',
     });
-    const categorySelect = screen.getByLabelText('Your Shop Category');
+    const categorySelect = screen.getByRole('button', {
+        name: 'Your Shop Category 0',
+    });
     const portfolioLinkInput = screen.queryByRole('textbox', {
         name: 'Portfolio Link',
     });

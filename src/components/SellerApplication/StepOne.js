@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {
     Box,
     FormControl,
@@ -13,13 +14,13 @@ import {
 } from '@mui/material';
 
 export default function StepOne() {
+    const [category, selectCategory] = useState(0);
+    const {register, handleSubmit, reset} = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+    };
     return (
-        <Box
-            component="form"
-            onSubmit={(e) => {
-                e.preventDefault();
-            }}
-        >
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <TextField id="first-name" label="First Name" />
             <TextField id="last-name" label="Last Name" />
             <FormControl>
@@ -29,9 +30,11 @@ export default function StepOne() {
                 <Select
                     labelId="your-shop-category-label"
                     id="your-shop-category"
-                    value={0}
+                    value={category}
                     label="Your Shop Category"
-                    onChange={() => {}}
+                    onChange={(e) => {
+                        selectCategory(e.target.value);
+                    }}
                 >
                     <MenuItem value={0}>0</MenuItem>
                     <MenuItem value={1}>1</MenuItem>
