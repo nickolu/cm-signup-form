@@ -81,10 +81,20 @@ I'm using apollo to make the queries. I'm not familiar with any other graphql li
 
 I'm using esling, prettier, and vscode to make all the code formatting something I don't have to think about. For my eslint configuration, I'm using the react, google, and prettier eslint preconfigurations. I have personal preferences for code styled, but am not super opinionaned about any particular style-guide as long as all of the project conforms to the same standards. These are items that should never come up in code reviews.
 
-## 5. Jest for unit testing
+## 5. Jest and testing-library/react for unit testing
 
 For testing I'm going to use jest. The tests won't strictly be "unit tests" as they may integrate various features to validate the requirements. I will use a TDD approach and write tests that validate the requirements for the story, then write the features to make the tests pass. As an additional note, this comes built-in with `create-react-app` so I won't have to do any setup.
+
+Additionally, I'm going to use testling-library/react which has a bunch of useful features for inspecting and interacting with the DOM, which a heavy focus on accessibility. Conveniently, this also comes bundled with `create-react-app`
 
 ## 6. Yarn for package management
 
 Yarn > npm
+
+## 7. Material UI design system
+
+To save effort with styling as well as adhering to a consistent design system, I'll include material ui. This will also enforce a lot of accessibility standards such as making sure form elements contain the correct labels and aria attributes.
+
+## 8. Additional styling
+
+For any additional styling I plan on using `styled-components`, a css-in-js library. Material-UI v5 has a built in css-in-js tool which is ver similar, which I might use instead. Not sure at this particular time. I haven't used it before so if its a pain I will just default to styled-components. Also, much of the styling can be configured through material ui's theme and individual component options. I think a general goal for a front-end project should be for the individual developers to have to write as little CSS as possible. This can be accomplished by leaning on design systems like material-ui (or bootstrap, etc) and intelligent use of theming.
